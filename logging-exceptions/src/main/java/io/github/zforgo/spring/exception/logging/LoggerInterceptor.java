@@ -62,8 +62,3 @@ class LoggerInterceptor implements MethodInterceptor {
 		return calculateDistance(source.getSuperclass().asSubclass(Throwable.class), target, ++distance);
 	}
 }
-/*
-	.filter(c -> c.isAssignableFrom(ex.getClass()))
-				.map(cls -> Pair.of(cls, calculateDistance(ex.getClass(), cls)))
-				.reduce((curr, next) -> next.getValue() > curr.getValue() ? curr : next);
- */
