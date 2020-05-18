@@ -1,4 +1,4 @@
-package io.github.zforgo.spring.exception.logging;
+package io.github.zforgo.spring.logging;
 
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.beans.BeansException;
@@ -20,6 +20,7 @@ class LoggerBeanPostProcessor implements BeanPostProcessor {
 	private static final UnaryOperator<Object> proxy = bean -> {
 		var factory = new ProxyFactory(bean);
 		factory.addAdvice(new LoggerInterceptor());
+		factory.setProxyTargetClass(true);
 		return factory.getProxy();
 	};
 

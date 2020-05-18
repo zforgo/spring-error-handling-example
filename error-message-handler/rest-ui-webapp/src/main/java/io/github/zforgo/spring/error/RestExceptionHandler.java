@@ -43,6 +43,11 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 		return ResponseEntity.badRequest().body(ErrorResponse.of(items));
 	}
 
+	@ExceptionHandler(ErrorResponseWrapperException.class)
+	ResponseEntity<ErrorResponse> handleWrapped(ErrorResponseWrapperException ex) {
+		return ResponseEntity.badRequest().body(ex.getErrorResponse());
+	}
+
 	@ExceptionHandler(ConstraintViolationException.class)
 	ResponseEntity<ErrorResponse> handle(ConstraintViolationException ex) {
 		var items = ex.getConstraintViolations().stream()
@@ -52,10 +57,10 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 	}
 
 	private static ErrorResponse.Item buildItem(ConstraintViolation<?> violation) {
-		var item = new ErrorResponse.Item()
-				.withMessageKey(violation.getMessageTemplate())
-				.withField(buildPathString.apply(violation.getPropertyPath()));
-		return item;
+		return ErrorResponse.Item .builder()
+				.messageKey(violation.getMessageTemplate())
+				.field(buildPathString.apply(violation.getPropertyPath()))
+				.build();
 	}
 
 }

@@ -56,4 +56,10 @@ public class SampleController {
 	public String parent(@Valid @RequestBody Parent parent) {
 		return "bar";
 	}
+
+	@GetMapping("/service")
+	public String callService() {
+		service.logged();
+		return "bar";
+	}
 }
