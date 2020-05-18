@@ -1,0 +1,142 @@
+{
+	"info": {
+		"_postman_id": "59b7088b-cc52-4edc-921b-04f9274b1c29",
+		"name": "spring-ex",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "query-param without contraint annotations",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-param with @NotNull",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/requiredString",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"requiredString"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-param with Numeric validation",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/intInterval",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"intInterval"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "query-param validated in service",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/intService",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"intService"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post invalid body - validated in controller",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"key\":\"valid-too-long-value-has-been-passed\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/child",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"child"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Post invalid complex  body - validated in controller",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"name\": \"Foo\",\n\t\"email\": \"zforgo@gmail.com\",\n\t\"address\": {\n\t\t\"zipCode\": 121\n\t},\n\t\"otherEmails\": [\n\t\t\"invalid\",\n\t\t\"mail@example.com\",\n\t\t\"other-invalid\"\n\t],\n\n\t\"children\": [{\n\t\t\t\"key\": \"invalid-too-long-value-has-been-passed\"\n\t\t},\n\t\t{\n\t\t\t\"key\": \"valid\",\n\t\t\t\"value\": 11\n\t\t},\n\t\t{\n\t\t\t\"key\": \"valid\",\n\t\t\t\"value\": 8\n\t\t},\n\t\t{\n\t\t\t\"key\": \"both-fields-are-invalid\",\n\t\t\t\"value\": 8\n\t\t}\n\t]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/parent",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"parent"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
